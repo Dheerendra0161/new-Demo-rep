@@ -1,0 +1,29 @@
+package api.endPoints;
+
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STEighthPointMeasure;
+
+public class Routes {
+	//For user module:swagger site https://petstore.swagger.io/
+	public static String base_URL="https://petstore.swagger.io/v2/";
+	
+	
+	
+	
+	
+	public static String post_URL=base_URL+"user";
+	public static String get_URL=base_URL+"user/{userName}";
+	public static String update_URL=base_URL+"user/{userName}";
+	public static String delete_URL=base_URL+"user/{userName}";
+	
+	public static String GitHubBase_URL="https://api.github.com";
+	public static String GitHubPost_URL=GitHubBase_URL+"/user/repos";
+	public static String GitHubGet_URL=GitHubBase_URL+"/Dheerendra6691/Repo1";
+	
+	
+	
+	
+	
+	//similarly for the pet and store module
+
+}
+

@@ -1,0 +1,41 @@
+package api.tests;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import api.Payload.User;
+import api.Utils.ExcelUtils;
+import api.endPoints.UserEndPoints;
+import io.restassured.response.Response;
+
+public class DataDrivenTest {
+
+	// If you are accessing the data directly from the excel logic then need to
+	// menstion the class name in which it is present , 
+	//dataProviderClass = ExcelUtils.class
+	@Test(priority = 1, dataProvider = "readExcelData")
+	public void createUsersPost(String UserID, String UserName, String FirstName, String LastName, String Email,
+			String Password, int Phone) {
+
+		User userPayload = new User();
+		userPayload.setId(Integer.parseInt(UserID));
+		userPayload.set(UserName);
+		userPayload.setSetFirstName(FirstName);
+		userPayload.setSetFirstName(LastName);
+		userPayload.setSetEmail(Email);
+		userPayload.setSetPassword(Password);
+		userPayload.setSetPhone(Phone);
+
+		Response response = UserEndPoints.createUser(userPayload);
+		// Assert.assertEquals(response.getStatusCode(), 200);
+	}
+
+	@DataProvider(name = "readExcelData")
+	public Object[][] dataFromExcel() {
+		String filePath = System.getProperty("user.dir") + "\\TestData\\testData.xlsx";
+		String sheetName = "TestData";
+		Object[][] data = ExcelUtils.getTestDataFromExcel(sheetName, filePath);
+		return data;
+	}
+}

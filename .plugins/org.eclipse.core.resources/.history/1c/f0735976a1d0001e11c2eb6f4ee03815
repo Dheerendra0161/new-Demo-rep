@@ -1,0 +1,56 @@
+package tests;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import UtilsFile.ExplicitWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class ReadLatestCommnet {
+	static WebDriver driver;
+
+	public static void main(String[] args) {
+
+		// trying to retrieve latest comment from the social media
+
+//		System.setProperty("webdriver.chrome.driver",
+//				"C:\\Users\\Dheerendra\\Downloads\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(options);
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+
+		driver.get("https://www.youtube.com/watch?v=1MoDQgSynCI");
+		List<WebElement> commentElements = driver.findElements(By.xpath(
+				"//div[@class='style-scope yt-live-chat-item-list-renderer' and @id='items']/yt-live-chat-text-message-renderer"));
+		if (commentElements.size() > 0) {
+			// Get the first comment (which should be the latest)
+			WebElement latestCommentElement = commentElements.get(0);
+			String latestComment = latestCommentElement.getText();
+			System.out.println(latestComment);
+		}
+//		ExplicitWait wait=new ExplicitWait(driver);
+//		wait.waitForElementToBeVisible(commentElements);
+//		
+//		 String latestComment = "";
+//	        if (commentElements.size() > 0) {
+//	            // Get the first comment (which should be the latest)
+//	            WebElement latestCommentElement = commentElements.get(0);
+//	            latestComment = latestCommentElement.getText();
+//	        }
+//
+//	        System.out.println("Latest Comment: " + latestComment);
+
+		// driver.quit();
+	}
+}

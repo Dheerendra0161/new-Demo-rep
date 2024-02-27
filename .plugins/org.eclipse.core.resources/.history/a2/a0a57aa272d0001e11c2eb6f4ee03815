@@ -1,0 +1,36 @@
+package api.endPoints;
+
+import static io.restassured.RestAssured.given;
+
+import api.Payload.User;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+
+public class UserEndPoints {
+	
+	String token="9f378887517c46948b9c0e768423abb96c0dcf03b61c7b3bd40af81f74d8ff6d";
+	//CRUD Create,Read(Get),Update,Delete methods
+	public static Response createUser(User payload) {
+		Response response = given().contentType(ContentType.JSON).accept(ContentType.JSON).accept(ContentType.JSON).headers("Authorization", "Bearer " + token)
+				.when().post(Routes.post_URL);
+		return response;
+
+	}
+
+	public static Response getUser(String userName) {
+		Response response = given().pathParam("userName", userName).get(Routes.get_URL);
+		return response;
+	}
+
+	public static Response updateUser(User payload, String userName) {
+		Response response = given().contentType(ContentType.JSON).pathParam("userName", userName).body(payload)
+				.put(Routes.update_URL);
+		return response;
+	}
+
+	public static Response deleteUser(String userName) {
+		Response response = given().pathParam("userName", userName).get(Routes.delete_URL);
+		return response;
+	}
+
+}

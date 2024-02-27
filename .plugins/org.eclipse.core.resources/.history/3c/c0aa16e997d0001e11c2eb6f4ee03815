@@ -1,0 +1,51 @@
+package tests;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class ReadLatestCommnet {
+	static WebDriver driver;
+	public static void main(String[] args) {
+//		System.setProperty("webdriver.chrome.driver",
+//				"C:\\Users\\Dheerendra\\Downloads\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(options);
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		// Navigate to a product page where comments are displayed
+		driver.get(
+				"https://www.flipkart.com/samsung-galaxy-f12-sky-blue-128-gb/product-reviews/itmbe3d99dae33a0?pid=MOBGFG79BPTJWHKS&lid=LSTMOBGFG79BPTJWHKSNKN0BO&marketplace=FLIPKART");
+
+		// Find all comment elements
+		List<WebElement> commentElements = driver.findElements(By.xpath("//p[@class='_2-N8zT']"));
+
+		// Iterate through the comments to find the latest one
+		String latestComment = "";
+		for (WebElement commentElement : commentElements) {
+			String commentText = commentElement.getText();
+			// Assuming comments are displayed in descending order (latest first)
+			if (!commentText.isEmpty()) {
+				latestComment = commentText;
+				break; // Found the latest comment, exit the loop
+			}
+		}
+
+		// Print the latest comment
+		System.out.println("Latest Comment: " + latestComment);
+
+		// Close the browser
+		//driver.quit();
+	}
+}

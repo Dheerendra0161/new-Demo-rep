@@ -1,0 +1,15 @@
+package restAssured6;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+public class Authentication {
+
+	
+	
+	void BasicAuthentication() {
+		
+	}
+	
+	
+	
+}

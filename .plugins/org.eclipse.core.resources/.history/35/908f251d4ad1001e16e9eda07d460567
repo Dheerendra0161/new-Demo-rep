@@ -1,0 +1,51 @@
+package api.endPoints;
+
+import api.Payload.User;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+
+public class UserEndPoints {
+
+    static String token = "Bearer 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";
+
+    // CRUD Create, Read(Get), Update, Delete methods
+    public static Response createUser(User payload) {
+        Response response = given()
+                .header("Authorization", token)
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(payload)
+                .when()
+                .post(Routes.post_URL);
+        return response;
+    }
+
+    public static Response getUser(String userName) {
+        Response response = given()
+        		.header("Authorization", token)
+                .pathParam("userName", userName)
+                .get(Routes.get_URL);
+        return response;
+    }
+
+    public static Response updateUser(User payload, String userName) {
+        Response response = given()
+                .header("Authorization", token)
+                .contentType(ContentType.JSON)
+                .pathParam("userName", userName)
+                .body(payload)
+                .when()
+                .put(Routes.update_URL);
+        return response;
+    }
+
+    public static Response deleteUser(String userName) {
+        Response response = given()
+                .header("Authorization", token)
+                .pathParam("userName", userName)
+                .delete(Routes.delete_URL);
+        return response;
+    }
+}

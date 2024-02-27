@@ -1,0 +1,17 @@
+package restAssured7;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+public class DeleteUsers {
+
+	
+	
+	void deleteUsers() {
+		
+		given().header("Authorization", "Bearer " + token)
+		.when().get("https://gorest.co.in/public/v2/users")
+		.then()
+		
+		
+	}
+}

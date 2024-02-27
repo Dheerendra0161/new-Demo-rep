@@ -1,0 +1,46 @@
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class ReadLatestCommnet {
+    static WebDriver driver;
+
+    public static void main(String[] args) {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); 
+
+        driver.get("https://www.youtube.com/watch?v=cJfNWRAMUN4");
+        
+        // Wait for the comments to load
+        try {
+            Thread.sleep(5000); // Wait for 5 seconds (you might need to adjust this)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Find all comment elements
+        List<WebElement> commentElements = driver.findElements(By.xpath("//ytd-comment-renderer[@id='comment']//div[@id='content']"));
+
+        String latestComment = "";
+        if (commentElements.size() > 0) {
+            // Get the first comment (which should be the latest)
+            WebElement latestCommentElement = commentElements.get(0);
+            latestComment = latestCommentElement.getText();
+        }
+
+        System.out.println("Latest Comment: " + latestComment);
+
+        //driver.quit();
+    }
+}

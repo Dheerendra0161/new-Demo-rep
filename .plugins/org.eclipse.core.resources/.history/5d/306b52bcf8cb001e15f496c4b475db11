@@ -1,0 +1,46 @@
+package restAssured6;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+import org.testng.annotations.Test;
+
+import static io.restassured.matcher.RestAssuredMatchers.*;
+
+public class Authentication {
+	// Note: BasicAuthentication,DigestAuthentication and PreemptiveAuthentication
+	// are required userID and Password ,the only difference is internally algorithm
+	// is different
+	@Test
+	void BasicAuthentication() {
+		given().auth().basic("Dheerendra0161", "Marikpur@1").when()
+				.get("https://api.github.com/repos/Dheerendra0161/Amazon-automation").then().statusCode(200)
+				.body("full_name", equalTo("Dheerendra0161/Amazon-automation")).log().all();
+	}
+
+	@Test
+	void DigestAuthentication() {
+		given().auth().digest("Dheerendra0161", "Marikpur@1").when()
+				.get("https://api.github.com/repos/Dheerendra0161/Amazon-automation").then().statusCode(200).log()
+				.all();
+	}
+
+	@Test
+	void PreemptiveAuthentication() {
+		given().auth().preemptive().basic("Dheerendra0161", "Marikpur@1").when()
+				.get("https://api.github.com/repos/Dheerendra0161/PageObjectModelNew").then().statusCode(200).log()
+				.all();
+	}
+
+	@Test
+	void BearerTockenAuthentication() {
+		given().headers("Authorization","Bearer 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") //see the postman headers for token 
+				.get("https://api.github.com/repos/Dheerendra0161/PageObjectModelNew").then().statusCode(200).log()
+				.all();
+	}
+	
+	
+	
+	
+	
+}

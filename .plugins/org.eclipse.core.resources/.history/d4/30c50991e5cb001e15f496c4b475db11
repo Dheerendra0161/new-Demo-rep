@@ -1,0 +1,5 @@
+package restAssured6;
+
+public class Authentication {
+
+}

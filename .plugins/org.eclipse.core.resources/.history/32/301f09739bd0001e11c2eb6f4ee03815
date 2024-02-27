@@ -1,0 +1,53 @@
+package tests;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import UtilsFile.ExplicitWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class ReadLatestCommnet {
+	static WebDriver driver;
+
+	public static void main(String[] args) {
+//		System.setProperty("webdriver.chrome.driver",
+//				"C:\\Users\\Dheerendra\\Downloads\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(options);
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); 
+
+		driver.get("https://www.youtube.com/watch?v=cJfNWRAMUN4");
+		   try {
+	            Thread.sleep(5000); // Wait for 5 seconds (you might need to adjust this)
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+		
+		List<WebElement> commentElements = driver.findElements(By.xpath("//div[@id='content']"));
+		ExplicitWait wait=new ExplicitWait(driver);
+		wait.waitForElementToBeVisible(commentElements);
+		
+		String latestComment = "";
+		for (WebElement commentElement : commentElements) {
+			String commentText = commentElement.getText();
+			if (!commentText.isEmpty()) {
+				latestComment = commentText;
+				break;
+			}
+		}
+
+		System.out.println("Latest Comment: " + latestComment);
+
+		//driver.quit();
+	}
+}

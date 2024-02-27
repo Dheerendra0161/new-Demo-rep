@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;baseComponent&apos; to &apos;UtilsFile&apos;&#x0D;&#x0A;- Original project: &apos;PageObjectModel&apos;&#x0D;&#x0A;- Original element: &apos;PageObjectModel/src/test/java/baseComponent&apos;&#x0D;&#x0A;- Renamed element: &apos;PageObjectModel/src/test/java/UtilsFile&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;baseComponent&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/test\/java=/test=/true=/=/optional=/true=/=/maven.pomderived=/true=/&lt;baseComponent" name="UtilsFile" qualified="false" references="true" stamp="1707723043364" textual="false" version="1.0"/>
+</session>

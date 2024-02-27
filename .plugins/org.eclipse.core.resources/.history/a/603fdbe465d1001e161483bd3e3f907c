@@ -1,0 +1,21 @@
+package api.endPoints;
+
+public class Routes {
+
+	// For user module:swagger site https://petstore.swagger.io/
+
+	// GitHub Repository
+	public static String BaseGitHub_URL = "https://api.github.com";
+	public static String PostGitHub_URL = BaseGitHub_URL + "/user/repos";
+	public static String GetGitHub_URL = BaseGitHub_URL + "/repos/Dheerendra6691/GitRepo1";
+	public static String PutGitHub_URL = BaseGitHub_URL + "/user/repos";
+	public static String PatchGitHub_URL = BaseGitHub_URL + "/repos/Dheerendra6691/GitRepo2";
+
+	// https://dummy.restapiexample.com/
+	public static String base_URL = "https://dummy.restapiexample.com";
+	public static String get_URL = base_URL + "/api/v1/employees";
+	public static String post_URL = base_URL + "/api/v1/create";
+	public static String put_URL = base_URL + "/public/api/v1/update/21";
+	public static String delete_URL = base_URL + "/public/api/v1/delete/2";
+
+}

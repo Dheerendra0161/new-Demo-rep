@@ -1,0 +1,14 @@
+package restAssured7;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+public class DeleteUsers {
+
+	
+	
+	void deleteUsers() {
+		
+		giv
+		
+	}
+}

@@ -1,0 +1,17 @@
+package api.tests;
+
+import org.testng.annotations.Test;
+
+import api.Payload.User;
+import api.Utils.ExcelUtils;
+
+public class DataDrivenTest {
+
+	@Test(priority = 1, dataProvider = "readExcelData", dataProviderClass = ExcelUtils.class)
+	public void createUsersPost(String UserID, String UserName, String FirstName, String LastName, String Email,
+			String Password, String Phone) {
+
+		User userPayload = new User();
+
+	}
+}

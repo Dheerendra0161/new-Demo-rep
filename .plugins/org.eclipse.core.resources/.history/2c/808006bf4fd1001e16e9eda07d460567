@@ -1,0 +1,41 @@
+package api.tests;
+
+import static io.restassured.RestAssured.given;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
+
+import api.Payload.User;
+import api.endPoints.Routes;
+import api.endPoints.UserEndPoints;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+
+public class GitUserTests {
+
+	
+	
+
+	
+	@Test(priority=1)
+	public void postUsers() {
+		
+		Response response = UserEndPoints.createUser();
+		response.then().log().all();
+		Assert.assertEquals(response.getStatusCode(), 200);
+		System.out.println("########################");
+	}
+	
+}
+public static Response createUser(User payload) {
+    Response response = given()
+            .header("Authorization", token)
+            .contentType(ContentType.JSON)
+            .body(payload)
+            .when()
+            .post(Routes.PostGitHub_URL);
+    return response;
+}

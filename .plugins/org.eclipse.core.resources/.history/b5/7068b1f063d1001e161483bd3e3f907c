@@ -1,0 +1,13 @@
+package api.Payload;
+
+public class User {
+
+	int id;
+	String employee_name;
+	int employee_salary;
+	int employee_age;
+	String profile_image;
+
+	"employee_name":"Tiger Nixon","employee_salary":320800,"employee_age":61,"profile_image":""
+
+}

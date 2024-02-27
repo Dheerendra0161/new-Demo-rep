@@ -1,0 +1,32 @@
+package restAssured6;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+import org.testng.annotations.Test;
+
+import static io.restassured.matcher.RestAssuredMatchers.*;
+public class Authentication {
+
+	
+	@Test
+	void BasicAuthentication() {
+		given().auth().basic("Dheerendra0161", "Marikpur@1")
+		.when().get("https://api.github.com/repos/Dheerendra0161/Amazon-automation")
+		.then().statusCode(200).body("auntheticated", equalTo(true)).log().all();
+	}
+	
+//	@Test
+//	void DigestAuthentication() {
+//		given().auth().digest("Dheerendra0161", "Marikpur@1")
+//		.when().get("https://api.github.com/repos/Dheerendra0161/Amazon-automation")
+//		.then().statusCode(200).log().all();
+//	}
+//	
+//	@Test
+//	void DigestAuthentication() {
+//		given().auth().digest("Dheerendra0161", "Marikpur@1")
+//		.when().get("https://api.github.com/repos/Dheerendra0161/Amazon-automation")
+//		.then().statusCode(200).log().all();
+//	}
+	
+}

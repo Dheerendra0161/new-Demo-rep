@@ -1,0 +1,67 @@
+package api.tests;
+
+import api.Payload.User;
+import api.endPoints.Routes;
+import api.endPoints.UserEndPoints;
+import com.github.javafaker.Faker;
+import io.restassured.response.Response;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class UserTests {
+
+    Faker faker;
+    User payLoad;
+
+    @BeforeClass
+    public void setup() {
+        faker = new Faker();
+        payLoad = new User();
+    }
+
+    @Test(priority = 1)
+    public void getUsers() {
+        Response response = UserEndPoints.getUser();
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+        System.out.println("########################Get");
+    }
+
+    @Test(priority = 2)
+    public void postUsers() {
+        // Assuming you want to create a new user with random data
+        payLoad.setId(faker.random().nextInt(15054, 98541));
+        payLoad.setEmployee_name(faker.name().username());
+        payLoad.setEmployee_salary(faker.number().numberBetween(150000, 350000));
+        payLoad.setEmployee_age(faker.number().numberBetween(20, 50));
+
+        Response response = UserEndPoints.createUser(payLoad);
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+        System.out.println("########################Post");
+    }
+
+    @Test(priority = 3)
+    public void updateUsers() {
+        // Assuming you received the user with id 19 from the response
+        // Modify the user's name and age
+        payLoad.setId(19); // Assuming the ID is already known
+        payLoad.setEmployee_name("Updated Name");
+        payLoad.setEmployee_age(42); // Updating the age
+
+        Response response = UserEndPoints.updateUser(payLoad, payLoad.getId());
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+        System.out.println("########################Put");
+    }
+
+    @Test(priority = 4)
+    public void deleteUsers() {
+        // Assuming you want to delete the user with id 19
+        Response response = UserEndPoints.deleteUser(19); // Assuming the ID is already known
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+        System.out.println("########################Delete");
+    }
+}

@@ -1,0 +1,9 @@
+package api.tests;
+
+public class DataDrivenTest {
+
+	public void createUsersPost(String UserID, String UserName, String FirstName, String LastName, String Email,
+			String Password, String Phone) {
+
+	}
+}

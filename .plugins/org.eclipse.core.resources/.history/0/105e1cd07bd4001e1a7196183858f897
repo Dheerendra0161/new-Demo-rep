@@ -1,0 +1,25 @@
+package api.endPoints;
+
+import twitter4j.*;
+import twitter4j.auth.AccessToken;
+
+	public class TwitterComments {
+	    public static void main(String[] args) {
+	        Twitter twitter = new TwitterFactory().getInstance();
+	        twitter.setOAuthConsumer("consumerKey", "consumerSecret");
+	        twitter.setOAuthAccessToken(new AccessToken("accessToken", "accessTokenSecret"));
+
+	        try {
+	            long tweetId = 1234567890; // ID of the tweet you want to get comments for
+	            ResponseList<Status> comments = twitter.showDirectMessage(tweetId).get(0).getReplies();
+	            
+	            for (Status comment : comments) {
+	                System.out.println("@" + comment.getUser().getScreenName() + " - " + comment.getText());
+	            }
+	        } catch (TwitterException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+}

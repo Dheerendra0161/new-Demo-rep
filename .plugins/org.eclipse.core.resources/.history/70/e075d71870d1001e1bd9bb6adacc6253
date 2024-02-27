@@ -1,0 +1,13 @@
+package api.Payload;
+
+public class User {
+
+	
+	String setUsername;
+	String	setFirstName;
+	String setLastName;
+	String setEmail;
+	String setPassword;
+	int setPhone;
+	
+}
